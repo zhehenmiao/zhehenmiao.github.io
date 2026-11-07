@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="程功的简历：电气工程背景，用 AI 在服务器上搭系统。">
+  <meta name="theme-color" content="#0a0b0d">
+  <title>程功 — 简历</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到主要内容</a>
+
+  <header class="hero" id="top">
+    <div class="page-shell hero__inner">
+      <div class="hero__main">
+        <h1>程功</h1>
+        <p class="hero__subtitle">电气工程专业，用 AI 在服务器上搭系统的人。</p>
+      </div>
+
+      <ul class="hero__stats" aria-label="关键数据">
+        <li class="stat">
+          <span class="stat__value">20</span>
+          <span class="stat__label">天</span>
+        </li>
+        <li class="stat">
+          <span class="stat__value">8,224</span>
+          <span class="stat__label">条对话</span>
+        </li>
+        <li class="stat">
+          <span class="stat__value">9</span>
+          <span class="stat__label">个任务闭环</span>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="page-shell layout">
+    <div class="timeline-rail">
+      <nav class="timeline-nav" aria-label="时间线导航">
+        <ol class="timeline-nav__list">
+          <li class="timeline-nav__item">
+            <a class="timeline-nav__link is-active" href="#timeline-1018" aria-current="true">
+              <span class="timeline-nav__date">10.18</span>
+              <span class="timeline-nav__title">建立第二大脑</span>
+            </a>
+          </li>
+          <li class="timeline-nav__item">
+            <a class="timeline-nav__link" href="#timeline-1022">
+              <span class="timeline-nav__date">10.22</span>
+              <span class="timeline-nav__title">三台机器定案</span>
+            </a>
+          </li>
+          <li class="timeline-nav__item">
+            <a class="timeline-nav__link" href="#timeline-1026">
+              <span class="timeline-nav__date">10.26</span>
+              <span class="timeline-nav__title">全部停摆</span>
+            </a>
+          </li>
+          <li class="timeline-nav__item">
+            <a class="timeline-nav__link" href="#timeline-1104">
+              <span class="timeline-nav__date">11.04</span>
+              <span class="timeline-nav__title">重新跑起来</span>
+            </a>
+          </li>
+          <li class="timeline-nav__item">
+            <a class="timeline-nav__link" href="#timeline-1107">
+              <span class="timeline-nav__date">11.07</span>
+              <span class="timeline-nav__title">从用工具到造工具</span>
+            </a>
+          </li>
+          <li class="timeline-nav__item timeline-nav__item--future">
+            <a class="timeline-nav__link" href="#future">
+              <span class="timeline-nav__date">2026</span>
+              <span class="timeline-nav__title">未来</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <main id="content">
+      <section class="project section section-panel" id="project" aria-labelledby="project-title">
+        <header class="section-heading">
+          <h2 id="project-title">多 Agent 协作系统</h2>
+          <p class="section-meta">个人项目 · <span class="mono">2026.10 – 2026.11</span></p>
+        </header>
+
+        <section class="project-block" aria-labelledby="problem-title">
+          <h3 id="problem-title">问题</h3>
+          <p>一个人同时用几套 AI 编程工具，它们各说各的、互相打架、活干一半就停。没有人盯着的时候，错误会被当成完成。</p>
+        </section>
+
+        <section class="project-block" aria-labelledby="solution-title">
+          <h3 id="solution-title">方案</h3>
+          <div class="project-copy">
+            <p>四台机器分工：调度中枢跑调度逻辑，Linux 执行机跑代码生成，GitHub 私有仓做唯一产物权威，网络出口负责翻墙调用。</p>
+            <p>全链路拆成九步：写契约 → 路由判活 → 派发 → 执行 → 确定性验收 → 模糊项判定 → 签字 → 合并 → 记账。</p>
+          </div>
+        </section>
+
+        <section class="project-block" aria-labelledby="result-title">
+          <h3 id="result-title">结果</h3>
+          <dl class="results">
+            <div class="result-row">
+              <dt class="result-number">305s → 8.9s</dt>
+              <dd>任务派发耗时。Codex 在远端跑，调度方不再阻塞等待，靠 SSH 回调取结果</dd>
+            </div>
+            <div class="result-row">
+              <dt class="result-number">9 单</dt>
+              <dd>端到端闭环。从写契约到合并入账全自动，九单无一返工超过两次</dd>
+            </div>
+            <div class="result-row">
+              <dt class="result-number">2 层</dt>
+              <dd>
+                <span>闸门：确定性检查（退出码、输出形状、变异测试三样一起判）</span>
+                <span>+ AI 判定（模糊项），第一层不过不花第二层的钱</span>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="project-block" aria-labelledby="pitfalls-title">
+          <h3 id="pitfalls-title">踩过的坑</h3>
+          <div class="project-copy">
+            <p>这三条是这套系统最值钱的部分：</p>
+            <ol class="pitfalls">
+              <li><span>读不出数据却盖了 OK 章 —— 磁盘检查脚本对 <code>/proc</code> 拿到 <code>-</code>，算术比较判假，直接走了「正常」分支并返回 0。修法：取值后先校验形状，不是数字就报错退出。</span></li>
+              <li><span>变异测试改错了地方 —— 要求「故意改坏一处看测试会不会红」，但改的那行本来就走不到，测试当然不红。修法：变异后全部用例仍绿时，标记为「可能等价变异」而不是直接判失败。</span></li>
+              <li><span>多个会话同时写同一个仓库 —— 一个会话的改动被另一个覆盖过一次。修法：动笔前先 <code>pull --rebase</code>，改已有段落前先看 <code>git log</code>，冲突留现场。</span></li>
+            </ol>
+          </div>
+        </section>
+      </section>
+
+      <section class="timeline section" id="timeline" aria-labelledby="timeline-title">
+        <header class="section-heading">
+          <h2 id="timeline-title">时间线</h2>
+        </header>
+
+        <div class="timeline-entries">
+          <article class="timeline-entry" id="timeline-1018" aria-labelledby="timeline-1018-title">
+            <time datetime="2026-10-18">10.18</time>
+            <h3 id="timeline-1018-title">建立第二大脑</h3>
+            <p>开始把每天做的事写进 Markdown 仓库，用 Git 管理。第一次让 AI 帮着记事。</p>
+          </article>
+
+          <article class="timeline-entry" id="timeline-1022" aria-labelledby="timeline-1022-title">
+            <time datetime="2026-10-22">10.22</time>
+            <h3 id="timeline-1022-title">三台机器定案</h3>
+            <p>调度、执行、产物各归各位。系统的形状第一次清楚。</p>
+          </article>
+
+          <article class="timeline-entry" id="timeline-1026" aria-labelledby="timeline-1026-title">
+            <time datetime="2026-10-26">10.26</time>
+            <h3 id="timeline-1026-title">全部停摆</h3>
+            <p>云账号出问题，两台机器一起没了，跑在上面的派活链路和产物仓库同时消失。第一次系统性地失去东西，也第一次想明白：备份和唯一权威不是一回事——两份数据不叫备份，能验证恢复的才叫备份。</p>
+          </article>
+
+          <article class="timeline-entry" id="timeline-1104" aria-labelledby="timeline-1104-title">
+            <time datetime="2026-11-04">11.04</time>
+            <h3 id="timeline-1104-title">重新跑起来</h3>
+            <p>换了执行机，九单跑通。从「让 AI 干活」变成「让 AI 干活并且能证明它干完了」。</p>
+          </article>
+
+          <article class="timeline-entry" id="timeline-1107" aria-labelledby="timeline-1107-title">
+            <time datetime="2026-11-07">11.07</time>
+            <h3 id="timeline-1107-title">从用工具到造工具</h3>
+            <p>不再只是用现成的 AI 产品，开始给自己造流程。这套系统现在归我改。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="stack section" id="stack" aria-labelledby="stack-title">
+        <header class="section-heading">
+          <h2 id="stack-title">技术栈</h2>
+        </header>
+        <dl class="stack-list">
+          <div class="stack-row">
+            <dt>系统</dt>
+            <dd>Linux（Ubuntu / Debian）· systemd · 磁盘内存网络排障 · Tailscale 组网 · nginx</dd>
+          </div>
+          <div class="stack-row">
+            <dt>开发</dt>
+            <dd>Python · Bash · Git / GitHub · 脚本自动化 · 命令行工具</dd>
+          </div>
+          <div class="stack-row">
+            <dt>AI</dt>
+            <dd>多模型 API 接入 · 提示词工程 · ComfyUI（SDXL / Anima 出图与二次采样）· 本地推理</dd>
+          </div>
+          <div class="stack-row">
+            <dt>安全</dt>
+            <dd>DVWA 靶场 · Web 渗透基础 · 日志审计</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="education section" id="education" aria-labelledby="education-title">
+        <header class="section-heading">
+          <h2 id="education-title">教育</h2>
+        </header>
+        <div class="education-row">
+          <p class="education-date">2024.09 – 2028.06</p>
+          <p>南京理工大学泰州科技学院 · 电气工程及其自动化 · 本科</p>
+        </div>
+      </section>
+
+      <section class="intent section" id="intent" aria-labelledby="intent-title">
+        <header class="section-heading">
+          <h2 id="intent-title">求职意向</h2>
+        </header>
+        <p class="intent-text">AI Agent 工程师 · 自动化系统工程师（电气工程背景）</p>
+        <p class="intent-note">希望把在服务器、脚本和 Agent 工作流上的实践，用于真实业务中的自动化与可靠交付。电气工程背景带来的是系统化排障、从输入到输出的闭环意识，以及把不确定性变成可验证步骤的习惯。也愿意从基础流程做起，把系统一点点做实。</p>
+      </section>
+    </main>
+
+    <footer class="future" id="future" aria-labelledby="future-title">
+      <div class="future__inner">
+        <h2 class="future__title" id="future-title">未来可期 · 期待与你的合作</h2>
+        <p class="contacts">
+          <a href="mailto:chenggongc0@gmail.com">chenggongc0@gmail.com</a>
+          <span class="contact-sep" aria-hidden="true">·</span>
+          <a href="https://github.com/zhehenmiao">github.com/zhehenmiao</a>
+          <span class="contact-sep" aria-hidden="true">·</span>
+          <span>江苏淮安</span>
+        </p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
