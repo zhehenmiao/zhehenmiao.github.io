@@ -89,14 +89,19 @@
 
         <section class="project-block" aria-labelledby="problem-title">
           <h3 id="problem-title">问题</h3>
-          <p>一个人同时用几套 AI 编程工具，它们各说各的、互相打架、活干一半就停。没有人盯着的时候，错误会被当成完成。</p>
+          <div class="project-copy">
+            <p>一个人同时用几套 AI 编程工具，它们各说各的、互相打架、活干一半就停。没有人盯着的时候，错误会被当成完成。</p>
+            <p>派活链路原来还是阻塞式的：一次派发要等 305 秒，超时就重发，重发又会打断对方。等待时间和互相干扰叠在一起，活越派越慢。没有闸门时，错误会被当成完成；派发没有异步状态，就只能阻塞等待。</p>
+          </div>
         </section>
 
         <section class="project-block" aria-labelledby="solution-title">
           <h3 id="solution-title">方案</h3>
           <div class="project-copy">
-            <p>四台机器分工：调度中枢跑调度逻辑，Linux 执行机跑代码生成，GitHub 私有仓做唯一产物权威，网络出口负责翻墙调用。</p>
+            <p>四台机器分工：调度中枢跑调度逻辑，Linux 执行机跑代码生成，GitHub 私有仓做唯一产物权威，网络出口负责翻墙调用。执行机只改文件、不碰 <code>.git</code>，提交权集中在调度侧，防止残留进程偷偷提交。</p>
             <p>全链路拆成九步：写契约 → 路由判活 → 派发 → 执行 → 确定性验收 → 模糊项判定 → 签字 → 合并 → 记账。</p>
+            <p>合并前过三层闸门：第一层确定性检查，用命令行量具输出数字；第二层 Jev 语义判定，给判定模型喂实测数据，而不是「我觉得对了」；第三层人工复核签字。任何一层不过就不合并。</p>
+            <p>派活改成异步：投递后立刻返回，状态异步回查，不再阻塞等待或靠重发打断对方。</p>
           </div>
         </section>
 
@@ -105,17 +110,21 @@
           <dl class="results">
             <div class="result-row">
               <dt class="result-number">305s → 8.9s</dt>
-              <dd>任务派发耗时。Codex 在远端跑，调度方不再阻塞等待，靠 SSH 回调取结果</dd>
+              <dd>任务派发耗时。投递后立即返回、状态异步回查，不再阻塞等待或超时重发打断对方</dd>
             </div>
             <div class="result-row">
-              <dt class="result-number">9 单</dt>
-              <dd>端到端闭环。从写契约到合并入账全自动，九单无一返工超过两次</dd>
+              <dt class="result-number">一条命令</dt>
+              <dd>跑完全链：契约 → 确定性检查 → 语义判定 → 入队 → 复核 → 合并 → 记账</dd>
             </div>
             <div class="result-row">
-              <dt class="result-number">2 层</dt>
+              <dt class="result-number">每单证据包</dt>
+              <dd>每条检查的实测数字都随单留存，复核和记账可以直接对账</dd>
+            </div>
+            <div class="result-row">
+              <dt class="result-number">3 层</dt>
               <dd>
-                <span>闸门：确定性检查（退出码、输出形状、变异测试三样一起判）</span>
-                <span>+ AI 判定（模糊项），第一层不过不花第二层的钱</span>
+                <span>闸门：确定性检查 → Jev 语义判定 → 人工复核签字</span>
+                <span>任何一层不过就不合并</span>
               </dd>
             </div>
           </dl>
@@ -202,7 +211,11 @@
         </header>
         <div class="education-row">
           <p class="education-date">2024.09 – 2028.06</p>
-          <p>南京理工大学泰州科技学院 · 电气工程及其自动化 · 本科</p>
+          <div class="education-main">
+            <p>南京理工大学泰州科技学院 · 电气工程及其自动化 · 本科</p>
+            <p class="education-note">专业方向：电路、模拟/数字电子技术、电力系统、自动控制、单片机与 C 语言。</p>
+            <p class="education-note">课外自学：Linux 系统运维、Python 脚本、Docker、Git。</p>
+          </div>
         </div>
       </section>
 
